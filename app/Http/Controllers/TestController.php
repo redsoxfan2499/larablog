@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Traits\Calculates;
 
 class TestController extends Controller
 {
+    use Calculates;
+
+    private $rushing = '75';
+    private $receiving = '35';
+
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +19,10 @@ class TestController extends Controller
      */
     public function index()
     {
+        // use Trait Calculate Add Method
+        $total = $this->add($this->rushing, $this->receiving);
         $sports = ['NFL', 'MLB', 'NBA', 'NHL'];
-        return view('test.index', compact('sports'));
+        return view('test.index', compact('sports', 'total'));
     }
 
     /**
